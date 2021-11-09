@@ -1,4 +1,4 @@
-var messages = [], //array that hold the record of each string in chat
+var messages = []; //array that hold the record of each string in chat
 var lastUserMessage = "";
 var botMessage = "";
 var botName = 'Your ưaifu';

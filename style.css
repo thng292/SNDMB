@@ -41,7 +41,7 @@ pre {
     margin-left: 20px;
 }
 
-.c-checkbox {
+/* .c-checkbox {
     display: none;
 }
 
@@ -182,4 +182,16 @@ pre {
     height: 100%;
     width: 5em;
     background-color: #ff7b73;
+} */
+.cbutton {
+    background: linear-gradient(150deg,cyan,violet);
+    border-radius: 12em;
+    width: 12.5em;
+    height: 4.25em;
+    display: inline-block;
+    transform: translateX(50%);
+}
+
+#ccon {
+    display: inline;
 }
