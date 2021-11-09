@@ -3,332 +3,39 @@
 
 <head>
     <title>SNDMB</title>
-    <style>
-        body {
-            font: 15px arial, sans-serif;
-            background: white;
-            padding-top: 15px;
-            padding-bottom: 15px;
-        }
-
-        #bodybox {
-            margin: 0 auto;
-            max-width: 70%;
-
-            font: 15px arial, sans-serif;
-            /*
-            padding-top: 20px;
-            padding-bottom: 25px;
-            padding-right: 25px;
-            padding-left: 25px;
-            */
-            border-radius: 3px;
-        }
-
-        #chatborder {
-            border-style: solid;
-            background-color: #0f0f0f;
-            margin-top: 20px;
-            margin-bottom: 20px;
-            margin-left: 20px;
-            margin-right: 20px;
-            padding-top: 10px;
-            padding-bottom: 15px;
-            padding-right: 20px;
-            padding-left: 15px;
-            border-radius: 15px;
-        }
-
-        .chatlog {
-            font: 15px arial, sans-serif;
-            color: white;
-        }
-
-        h1 {
-            margin: auto;
-        }
-
-        pre {
-            background-color: #f0f0f0;
-            margin-left: 20px;
-        }
-
-        .c-checkbox {
-            display: none;
-        }
-
-        .c-checkbox:checked+.c-formContainer .c-form {
-            width: 37.5em;
-        }
-
-        .c-checkbox:checked+.c-formContainer .c-form__toggle {
-            visibility: hidden;
-            opacity: 0;
-            transform: scale(0.7);
-        }
-
-        .c-checkbox:checked+.c-formContainer .c-form__input,
-        .c-checkbox:checked+.c-formContainer .c-form__buttonLabel {
-            transition: 0.2s 0.1s;
-            visibility: visible;
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .c-checkbox:not(:checked)+.c-formContainer .c-form__input:required:valid~.c-form__toggle::before,
-        .c-checkbox:checked+.c-formContainer .c-form__input:required:valid~.c-form__toggle::before {
-            content: 'Thank You! \1F60A';
-        }
-
-        .c-checkbox:not(:checked)+.c-formContainer .c-form__input:required:valid~.c-form__toggle {
-            pointer-events: none;
-            cursor: default;
-        }
-
-        .c-formContainer,
-        .c-form,
-        .c-form__toggle {
-            width: 10em;
-            height: 4.25em;
-        }
-
-        .c-formContainer {
-            margin: 0 auto;
-            position: relative;
-            font-weight: 700;
-        }
-
-        .c-form,
-        .c-form__toggle {
-            position: absolute;
-            border-radius: 6.25em;
-            background-color: #fff;
-            transition: 0.2s;
-        }
-
-        .c-form {
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 0.625em;
-            box-sizing: border-box;
-            box-shadow: 0 0.125em 0.3125em rgba(0, 0, 0, 0.3);
-            display: flex;
-            justify-content: center;
-        }
-
-        .c-form__toggle {
-            color: #ff7b73;
-            top: 0;
-            cursor: pointer;
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .c-form__toggle::before {
-            font-size: 1.75em;
-            content: attr(data-title);
-        }
-
-        .c-form__input,
-        .c-form__button {
-            font: inherit;
-            border: 0;
-            outline: 0;
-            border-radius: 5em;
-            box-sizing: border-box;
-        }
-
-        .c-form__input,
-        .c-form__buttonLabel {
-            font-size: 1.75em;
-            opacity: 0;
-            visibility: hidden;
-            transform: scale(0.7);
-            transition: 0s;
-        }
-
-        .c-form__input {
-            color: #fcc;
-            height: 100%;
-            width: 100%;
-            padding: 0 0.714em;
-        }
-
-        .c-form__input::placeholder {
-            color: inherit;
-        }
-
-        .c-form__input:required:valid {
-            color: #ff7b73;
-        }
-
-        .c-form__input:required:valid+.c-form__buttonLabel {
-            color: #fff;
-        }
-
-        .c-form__input:required:valid+.c-form__buttonLabel::before {
-            pointer-events: auto;
-        }
-
-        .c-form__buttonLabel {
-            color: #ffaea9;
-            height: 100%;
-            width: auto;
-        }
-
-        .c-form__buttonLabel::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            cursor: pointer;
-        }
-
-        .c-form__button {
-            color: inherit;
-            padding: 0;
-            height: 100%;
-            width: 5em;
-            background-color: #ff7b73;
-        }
-    </style>
+    <link href="style.css" rel="stylesheet">
 </head>
 
 <body>
     <div id='bodybox'>
         <div id='chatborder'>
-            <p id="chatlog7" class="chatlog">&nbsp;</p>
-            <p id="chatlog6" class="chatlog">&nbsp;</p>
-            <p id="chatlog5" class="chatlog">&nbsp;</p>
-            <p id="chatlog4" class="chatlog">&nbsp;</p>
-            <p id="chatlog3" class="chatlog">&nbsp;</p>
-            <p id="chatlog2" class="chatlog">&nbsp;</p>
-            <p id="chatlog1" class="chatlog">&nbsp;</p>
+            
         </div>
     </div>
-    <input class="c-checkbox" type="checkbox" id="checkbox">
-    <div class="c-formContainer">
-        <form class="c-form" action="">
-            <input class="c-form__input" placeholder="Type in" type="text" id=chatbox>
-            <label class="c-form__buttonLabel" for="checkbox">
-                <button class="c-form__button" type="button" onclick="newEntry()">Send</button>
-            </label>
-            <label class="c-form__toggle" for="checkbox" data-title="Type"></label>
-        </form>
-        <!--
-        <form class="c-form">
-            <label class="c-form__toggle" for="checkbox" data-title="Voice"></label>
-        </form>
-    -->
+    <div>
+        <input class="c-checkbox" type="checkbox" id="checkbox">
+        <div class="c-formContainer">
+            <form class="c-form" action="">
+                <input class="c-form__input" placeholder="Type in" type="text" id=chatbox>
+                <label class="c-form__buttonLabel" for="checkbox">
+                    <button class="c-form__button" type="button" id="send" onclick="newEntry()">Send</button>
+                </label>
+                <label class="c-form__toggle" for="checkbox" data-title="Type"></label>
+            </form>
+        </div>
+        <input class="c-checkbox" type="checkbox" id="voice">
+        <div class="c-formContainer">
+            <form class="c-form" action="">
+                <input class="c-form__input" placeholder="Type in" type="text" id=chatbox>
+                <label class="c-form__buttonLabel" for="checkbox">
+                    <button class="c-form__button" type="button" id="send" onclick="newEntry()">Send</button>
+                </label>
+                <label class="c-form__toggle" for="checkbox" data-title="Voice"></label>
+            </form>
+        </div>
     </div>
-    <script>
-        //links
-        //http://eloquentjavascript.net/09_regexp.html
-        //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-
-        var messages = [], //array that hold the record of each string in chat
-            lastUserMessage = "", //keeps track of the most recent input string from the user
-            botMessage = "", //var keeps track of what the chatbot is going to say
-            botName = 'Your ưaifu', //name of the chatbot
-            talking = true; //when false the speach function doesn't work
-        var Uname = "Lolicon ManhBuoi: "
-
-        //edit this function to change what the chatbot says
-        function chatbotResponse() {
-            talking = true;
-            botMessage = "I'm fucking confused"; //the default message
-            lastUserMessage = lastUserMessage.toLocaleLowerCase();
-            if (lastUserMessage === 'hi') {
-                const hi = ['hi', 'howdy', 'hello']
-                botMessage = hi[Math.floor(Math.random() * (hi.length))];;
-            }
-
-            if (lastUserMessage.lastIndexOf('hello') != -1) {
-                botMessage = "Lô Con C*c"
-            }
-
-            if (lastUserMessage.lastIndexOf('name') != -1) {
-                botMessage = 'My name is ' + botName;
-            }
-        }
-        //this runs each time enter is pressed.
-        //It controls the overall input and output
-        function newEntry() {
-            //if the message from the user isn't empty then run 
-            if (document.getElementById("chatbox").value != "") {
-                //pulls the value from the chatbox ands sets it to lastUserMessage
-                lastUserMessage = document.getElementById("chatbox").value;
-                lastUserMessage = lastUserMessage.trim()
-                //sets the chat box to be clear
-                document.getElementById("chatbox").value = "";
-                //adds the value of the chatbox to the array messages
-                messages.push("<b>" + Uname + "</b>" + lastUserMessage);
-                //Speech(lastUserMessage);  //says what the user typed outloud
-                //sets the variable botMessage in response to lastUserMessage
-                chatbotResponse();
-                //add the chatbot's name and message to the array messages
-                messages.push("<b>" + botName + ":</b> " + botMessage);
-                // says the message using the text to speech function written below
-                Speech(botMessage);
-                //outputs the last few array elements of messages to html
-                for (var i = 1; i < 8; i++) {
-                    if (messages[messages.length - i])
-                        document.getElementById("chatlog" + i).innerHTML = messages[messages.length - i];
-                }
-            }
-        }
-
-        //text to Speech
-        //https://developers.google.com/web/updates/2014/01/Web-apps-that-talk-Introduction-to-the-Speech-Synthesis-API
-        function Speech(say) {
-            // if ('speechSynthesis' in window && talking) {
-            //     var utterance = new SpeechSynthesisUtterance(say);
-            //     //msg.voice = voices[10]; // Note: some voices don't support altering params
-            //     //msg.voiceURI = 'native';
-            //     //utterance.volume = 1; // 0 to 1
-            //     //utterance.rate = 0.1; // 0.1 to 10
-            //     //utterance.pitch = 1; //0 to 2
-            //     //utterance.text = 'Hello World';
-            //     //utterance.lang = 'en-US';
-            //     speechSynthesis.speak(utterance);
-            // }
-            var url = "https://api.fpt.ai/hmi/tts/v5";
-
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", url);
-
-            xhr.setRequestHeader("api-key", "jtZwmbOIchxp9HfSgeTPnlvO4ApaQ8yk");
-            xhr.setRequestHeader("speed", "0");
-            xhr.setRequestHeader("voice", "banmai");
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            
-            xhr.on
-
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {
-                    console.log(xhr.status);
-                    var alink = JSON.parse(xhr.responseText);
-                    var audio = new Audio(alink.async);
-                    audio.play();
-                };
-            };
-
-            var data = say;
-            xhr.send(data);
-        }
-        //runs the keypress() function when a key is pressed
-        var chb = document.getElementById("chatbox");
-        chb.addEventListener("keydown", function (e) {
-            if (e.keyCode === 13) {
-                newEntry();
-            };
-        });
-        //if the key pressed is 'enter' runs the function newEntry()
-        //clears the placeholder text ion the chatbox
-    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="engine.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,185 @@
+body {
+    font: 15px arial, sans-serif;
+    background: white;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+#bodybox {
+    margin: 0 auto;
+    font: 15px arial, sans-serif;
+    width: 70vw;
+    border-radius: 3px;
+}
+
+#chatborder {
+    border-style: solid;
+    background-color: #0f0f0f;
+    height: 50vh;
+    /* margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 15px;
+    padding-right: 20px;
+    padding-left: 15px; */
+    border-radius: 15px;
+}
+
+.chatlog {
+    font: 15px arial, sans-serif;
+    color: white;
+}
+
+h1 {
+    margin: auto;
+}
+
+pre {
+    background-color: #f0f0f0;
+    margin-left: 20px;
+}
+
+.c-checkbox {
+    display: none;
+}
+
+.c-checkbox:checked+.c-formContainer .c-form {
+    width: 37.5em;
+}
+
+.c-checkbox:checked+.c-formContainer .c-form__toggle {
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(0.7);
+}
+
+.c-checkbox:checked+.c-formContainer .c-form__input,
+.c-checkbox:checked+.c-formContainer .c-form__buttonLabel {
+    transition: 0.2s 0.1s;
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
+}
+
+.c-checkbox:not(:checked)+.c-formContainer .c-form__input:required:valid~.c-form__toggle::before,
+.c-checkbox:checked+.c-formContainer .c-form__input:required:valid~.c-form__toggle::before {
+    content: 'Thank You! \1F60A';
+}
+
+.c-checkbox:not(:checked)+.c-formContainer .c-form__input:required:valid~.c-form__toggle {
+    pointer-events: none;
+    cursor: default;
+}
+
+.c-formContainer,
+.c-form,
+.c-form__toggle {
+    width: 10em;
+    height: 4.25em;
+}
+
+.c-formContainer {
+    margin: 0 auto;
+    position: relative;
+    font-weight: 700;
+    padding: 1vh 1vw;
+}
+
+.c-form,
+.c-form__toggle {
+    position: absolute;
+    border-radius: 6.25em;
+    background-color: #fff;
+    transition: 0.2s;
+}
+
+.c-form {
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.625em;
+    box-sizing: border-box;
+    box-shadow: 0 0.125em 0.3125em rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+}
+
+.c-form__toggle {
+    color: #ff7b73;
+    top: 0;
+    cursor: pointer;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.c-form__toggle::before {
+    font-size: 1.75em;
+    content: attr(data-title);
+}
+
+.c-form__input,
+.c-form__button {
+    font: inherit;
+    border: 0;
+    outline: 0;
+    border-radius: 5em;
+    box-sizing: border-box;
+}
+
+.c-form__input,
+.c-form__buttonLabel {
+    font-size: 1.75em;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.7);
+    transition: 0s;
+}
+
+.c-form__input {
+    color: #fcc;
+    height: 100%;
+    width: 100%;
+    padding: 0 0.714em;
+}
+
+.c-form__input::placeholder {
+    color: inherit;
+}
+
+.c-form__input:required:valid {
+    color: #ff7b73;
+}
+
+.c-form__input:required:valid+.c-form__buttonLabel {
+    color: #fff;
+}
+
+.c-form__input:required:valid+.c-form__buttonLabel::before {
+    pointer-events: auto;
+}
+
+.c-form__buttonLabel {
+    color: #ffaea9;
+    height: 100%;
+    width: auto;
+}
+
+.c-form__buttonLabel::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    cursor: pointer;
+}
+
+.c-form__button {
+    color: inherit;
+    padding: 0;
+    height: 100%;
+    width: 5em;
+    background-color: #ff7b73;
+}
