@@ -3,10 +3,11 @@ var botMessage = "";
 var botName = 'Your ưaifu';
 var talking = true;
 var Uname = "Lolicon ManhBuoi: "
-var test = true; //test
+var test = false; //test
 //alert("hidding");
 
 $('#formcon').hide();
+$('#anima').hide();
 function trans() {
     $("#typein").hide();
     $('#formcon').show();
@@ -43,15 +44,19 @@ function Speech(say) {
         xhr.setRequestHeader("voice", "banmai");
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-        // xhr.onprogress = function() {
-        //     // loading sign
-        // }
+        xhr.onprogress = function() {
+            $("#anima").show();
+        }
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
+                $("#anima").hide();
                 console.log(xhr.status);
                 var alink = JSON.parse(xhr.responseText);
                 var audio = new Audio(alink.async);
                 audio.play();
+                $("#chatborder").append('<p class="chatlog">'+ botMessage + '</p>');
+                var element = document.getElementById("chatborder");
+                element.scrollTop = element.scrollHeight;
             };
         };
 
@@ -72,7 +77,6 @@ function newEntry() {
         chatbotResponse();
         temp = "<b>" + botName + ":</b> " + botMessage
         Speech(botMessage);
-        $("#chatborder").append('<p class="chatlog">'+ botMessage + '</p>');
     } else {
         $('#chatbox').attr("placeholder", "Type sth in bro");
     }
