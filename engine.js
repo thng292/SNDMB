@@ -1,4 +1,4 @@
-var messages = []; //array that hold the record of each string in chat
+var messages = [];
 var lastUserMessage = "";
 var botMessage = "";
 var botName = 'Your ưaifu';
@@ -12,7 +12,6 @@ function trans() {
     $("#formcon").show();
 }
 
-//edit this function to change what the chatbot says
 function chatbotResponse() {
     talking = true;
     botMessage = "I'm fucking confused"; //the default message
@@ -33,22 +32,14 @@ function chatbotResponse() {
 
 function newEntry() {
     if (document.getElementById("chatbox").value != "") {
-        //pulls the value from the chatbox ands sets it to lastUserMessage
         lastUserMessage = document.getElementById("chatbox").value;
         lastUserMessage = lastUserMessage.trim()
-        //sets the chat box to be clear
         document.getElementById("chatbox").value = "";
         $('#chatbox').attr("placeholder", "Type in");
-        //adds the value of the chatbox to the array messages
         messages.push("<b>" + Uname + "</b>" + lastUserMessage);
-        //Speech(lastUserMessage);  //says what the user typed outloud
-        //sets the variable botMessage in response to lastUserMessage
         chatbotResponse();
-        //add the chatbot's name and message to the array messages
         messages.push("<b>" + botName + ":</b> " + botMessage);
-        // says the message using the text to speech function written below
         Speech(botMessage);
-        //outputs the last few array elements of messages to html
         for (var i = 1; i < 8; i++) {
             if (messages[messages.length - i])
                 document.getElementById("chatlog" + i).innerHTML = messages[messages.length - i];
@@ -58,8 +49,6 @@ function newEntry() {
     }
 }
 
-//text to Speech
-//https://developers.google.com/web/updates/2014/01/Web-apps-that-talk-Introduction-to-the-Speech-Synthesis-API
 function Speech(say) {
     var url = "https://api.fpt.ai/hmi/tts/v5";
 
@@ -85,7 +74,7 @@ function Speech(say) {
     var data = say;
     xhr.send(data);
 }
-//runs the keypress() function when a key is pressed
+
 var chb = document.getElementById("chatbox");
 chb.addEventListener("keydown", function (e) {
     if (e.keyCode === 13) {
