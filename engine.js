@@ -1,17 +1,16 @@
-var messages = [];
 var lastUserMessage = "";
 var botMessage = "";
 var botName = 'Your ưaifu';
 var talking = true;
 var Uname = "Lolicon ManhBuoi: "
+var test = true; //test
+//alert("hidding");
 
-$("#formcon").hide();
-
+$('#formcon').hide();
 function trans() {
-    $("#typein").toggle();
-    $("#formcon").show();
+    $("#typein").hide();
+    $('#formcon').show();
 }
-
 function chatbotResponse() {
     talking = true;
     botMessage = "I'm fucking confused"; //the default message
@@ -30,54 +29,52 @@ function chatbotResponse() {
     }
 }
 
+function Speech(say) {
+    if (test) 
+        alert(say);
+    else {
+        var url = "https://api.fpt.ai/hmi/tts/v5";
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", url);
+
+        xhr.setRequestHeader("api-key", "jtZwmbOIchxp9HfSgeTPnlvO4ApaQ8yk");
+        xhr.setRequestHeader("speed", "0");
+        xhr.setRequestHeader("voice", "banmai");
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        // xhr.onprogress = function() {
+        //     // loading sign
+        // }
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                console.log(xhr.status);
+                var alink = JSON.parse(xhr.responseText);
+                var audio = new Audio(alink.async);
+                audio.play();
+            };
+        };
+
+        var data = say;
+        xhr.send(data);
+    }
+}
+
 function newEntry() {
     if (document.getElementById("chatbox").value != "") {
         lastUserMessage = document.getElementById("chatbox").value;
         lastUserMessage = lastUserMessage.trim()
+        //alert(lastUserMessage);
         document.getElementById("chatbox").value = "";
+        $("#chatborder").append('<p class="chatlog chatlogU">' + lastUserMessage + '</p>');
         $('#chatbox').attr("placeholder", "Type in");
-        messages.push("<b>" + Uname + "</b>" + lastUserMessage);
+        var temp = lastUserMessage;
         chatbotResponse();
-        messages.push("<b>" + botName + ":</b> " + botMessage);
+        temp = "<b>" + botName + ":</b> " + botMessage
         Speech(botMessage);
-        for (var i = 1; i < 8; i++) {
-            if (messages[messages.length - i])
-                document.getElementById("chatlog" + i).innerHTML = messages[messages.length - i];
-        }
+        $("#chatborder").append('<p class="chatlog">'+ botMessage + '</p>');
     } else {
         $('#chatbox').attr("placeholder", "Type sth in bro");
     }
+    alert("Fuck");
 }
-
-function Speech(say) {
-    var url = "https://api.fpt.ai/hmi/tts/v5";
-
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", url);
-
-    xhr.setRequestHeader("api-key", "jtZwmbOIchxp9HfSgeTPnlvO4ApaQ8yk");
-    xhr.setRequestHeader("speed", "0");
-    xhr.setRequestHeader("voice", "banmai");
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-    xhr.on
-
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            console.log(xhr.status);
-            var alink = JSON.parse(xhr.responseText);
-            var audio = new Audio(alink.async);
-            audio.play();
-        };
-    };
-
-    var data = say;
-    xhr.send(data);
-}
-
-var chb = document.getElementById("chatbox");
-chb.addEventListener("keydown", function (e) {
-    if (e.keyCode === 13) {
-        newEntry();
-    };
-});
