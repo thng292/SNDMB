@@ -51,17 +51,44 @@ body {
     cursor: pointer;
     font-weight: 700;
     font-size: 1.75em;
-    padding: 0.8em 2em;
+    padding: 0.5em 1.5em;
     border: 0;
     box-sizing: border-box;
     box-shadow: 0 0.125em 0.3125em rgba(0, 0, 0, 0.3);
     margin: 0 1vw;
 }
 
-#voicein:checked {
-
+#formcon {
+    display: inline-block;
 }
 
-#chatbox:checked {
+.cbuttlabel {
+    height: 100%;
+    width: auto;
+}
 
+#chatbox {
+    z-index: -1;
+    width: 35vw;
+    border: 0;
+    box-sizing: border-box;
+    box-shadow: 0 0.125em 0.3125em rgba(0, 0, 0, 0.3);
+    border-radius: 12em;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.75em;
+    padding: 0.5em ;
+}
+
+#sendbutt {
+    position: absolute;
+    background-color: #ff645c;
+    border-radius: 12em;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.75em;
+    padding: 0.3em 1em;
+    border: 0;
+    box-sizing: border-box;
+    transform: translate(-110%,10%);
 }

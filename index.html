@@ -36,11 +36,14 @@
         <!-- <input id="chatbox" type="text" class="cinput"> -->
         <div id="ccon">
             <button class="cbutt" id="voicein">Voice</button>
-            <button class="cbutt" id="chatbox">Type</button>
+            <button class="cbutt" id="typein" onclick="trans()">Type</button>
+            <form id="formcon">
+                <input type="text" id="chatbox" placeholder="Type in">
+                <button id="sendbutt" onclick="newEntry()">Send</button>
+            </form>
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="engine.js"></script>
 </body>
-
 </html>

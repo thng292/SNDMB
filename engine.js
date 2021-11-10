@@ -5,6 +5,13 @@ var botName = 'Your ưaifu';
 var talking = true;
 var Uname = "Lolicon ManhBuoi: "
 
+$("#formcon").hide();
+
+function trans() {
+    $("#typein").toggle();
+    $("#formcon").show();
+}
+
 //edit this function to change what the chatbot says
 function chatbotResponse() {
     talking = true;
@@ -23,8 +30,7 @@ function chatbotResponse() {
         botMessage = 'My name is ' + botName;
     }
 }
-//this runs each time enter is pressed.
-//It controls the overall input and output
+
 function newEntry() {
     if (document.getElementById("chatbox").value != "") {
         //pulls the value from the chatbox ands sets it to lastUserMessage
