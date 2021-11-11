@@ -2,7 +2,7 @@ var lastUserMessage = "";
 var botMessage = "";
 var botName = 'Your ưaifu';
 var Uname = "Lolicon ManhBuoi: "
-var test = true; //test
+var test = false; //test
 //alert("hidding");
 
 $('#formcon').hide();
@@ -23,6 +23,7 @@ function rec() {
         recing = false;
         $('#temp').remove();
         $('#voicein').html("Voice");
+
     }
 }
 
@@ -72,35 +73,28 @@ function chatbotResponse() {
     }
 }
 
-function Speech(say) {
+async function Speech(say) {
     if (test) 
         alert(say);
     else {
         var url = "https://api.fpt.ai/hmi/tts/v5";
-
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", url);
-
-        xhr.setRequestHeader("api-key", "jtZwmbOIchxp9HfSgeTPnlvO4ApaQ8yk");
-        xhr.setRequestHeader("speed", "0");
-        xhr.setRequestHeader("voice", "banmai");
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                $("#anima").hide();
-                console.log(xhr.status);
-                var alink = JSON.parse(xhr.responseText);
-                var audio = new Audio(alink.async);
-                audio.play();
-                $("#anima").before('<p class="chatlog">'+ botMessage + '</p>');
-                var element = document.getElementById("chatborder");
-                element.scrollTop = element.scrollHeight;
-            };
-        };
-
-        var data = say;
-        xhr.send(data);
+        var json = (await fetch(url, {
+            method: "POST",
+            headers: {
+                "api-key": "jtZwmbOIchxp9HfSgeTPnlvO4ApaQ8yk",
+                "speed": 0,
+                "voice": "banmai"
+            },
+            body: say
+        })).json();
+        $("#anima").hide();
+        console.log(xhr.status);
+        var alink = JSON.parse(xhr.responseText);
+        var audio = new Audio(alink.async);
+        audio.play();
+        $("#anima").before('<p class="chatlog">'+ botMessage + '</p>');
+        var element = document.getElementById("chatborder");
+        element.scrollTop = element.scrollHeight;
     }
 }
 
