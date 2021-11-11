@@ -11,6 +11,21 @@ function trans() {
     $("#typein").hide();
     $('#formcon').show();
 }
+
+var recing = false;
+function rec() {
+    if(!recing) {
+        recing = true;
+        $('#anima').before("<p class='chatlog' id='temp'>Listening</p>");
+        $('#voicein').html("Stop");
+        toggleRecording(this);
+    } else {
+        recing = false;
+        $('#temp').remove();
+        $('#voicein').html("Voice");
+    }
+}
+
 function chatbotResponse() {
     $("#anima").show();
     botMessage = "I'm fucking confused"; //the default message
@@ -54,9 +69,6 @@ function chatbotResponse() {
             botMessage = "Opening";
             window.open("https://github.com/thng292/SNDMB",'_blank');   
         }
-    } else
-    if (lastUserMessage.lastIndexOf('hát')!=-1) {
-
     }
 }
 
@@ -81,7 +93,7 @@ function Speech(say) {
                 var alink = JSON.parse(xhr.responseText);
                 var audio = new Audio(alink.async);
                 audio.play();
-                $("#chatborder").append('<p class="chatlog">'+ botMessage + '</p>');
+                $("#anima").before('<p class="chatlog">'+ botMessage + '</p>');
                 var element = document.getElementById("chatborder");
                 element.scrollTop = element.scrollHeight;
             };
@@ -98,7 +110,7 @@ function newEntry() {
         lastUserMessage = lastUserMessage.trim()
         //alert(lastUserMessage);
         document.getElementById("chatbox").value = "";
-        $("#chatborder").append('<p class="chatlog chatlogU">' + lastUserMessage + '</p>');
+        $("#anima").before('<p class="chatlog chatlogU">' + lastUserMessage + '</p>');
         $('#chatbox').attr("placeholder", "Type in");
         var temp = lastUserMessage;
         chatbotResponse();
@@ -108,4 +120,4 @@ function newEntry() {
         $('#chatbox').attr("placeholder", "Type sth in bro");
     }
 }
-alert("Fuck");
+//alert("Fuck");

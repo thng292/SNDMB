@@ -73,6 +73,10 @@ body {
     height: 50vh;
     color: whitesmoke;
     border-radius: 15px;
+    overflow: hidden;
+}
+
+#chatborder:hover {
     overflow: auto;
 }
 
