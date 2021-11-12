@@ -1,14 +1,9 @@
 URL = window.URL || window.webkitURL;
 var gumStream;
-//stream from getUserMedia() 
 var rec;
-//Recorder.js object 
 var input;
-//MediaStreamAudioSourceNode we'll be recording 
-// shim for AudioContext when it's not avb. 
 var AudioContext = window.AudioContext || window.webkitAudioContext;
 var audioContext = new AudioContext;
-//new audio context to help us record 
 var audioUrl = "";
 
 function startRecording() {
@@ -17,26 +12,45 @@ function startRecording() {
         video: false
     }
     navigator.mediaDevices.getUserMedia(constraints).then(function (stream) {
-        console.log("getUserMedia() success, stream created, initializing Recorder.js ...");
         gumStream = stream;
         input = audioContext.createMediaStreamSource(stream);
         rec = new Recorder(input, {
             numChannels: 1
         })
-        //start the recording process 
         rec.record()
         console.log("Recording started");
     }).catch(function (err) {
-        //enable the record button if getUserMedia() fails 
         alert("Failed to start recording");
     });
 }
 
+function sendAudio(audio) {
+    var url = "https://api.fpt.ai/hmi/asr/general";
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url);
+    xhr.setRequestHeader("api-key","jtZwmbOIchxp9HfSgeTPnlvO4ApaQ8yk");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            $("#anima").hide();
+            console.log(xhr.responseText);
+            var texxt = JSON.parse(xhr.responseText);
+            $("#anima").before('<p class="chatlog chatlogU">'+ texxt.hypotheses[0].utterance + '</p>');
+            var element = document.getElementById("chatborder");
+            element.scrollTop = element.scrollHeight;
+        }
+    }
+    xhr.send(audio);
+}
+
+function createDownloadLink(blob) {
+    var url = URL.createObjectURL(blob);
+    window.open(url);
+    sendAudio(url);
+}
+
 function stopRecording() {
     console.log("stopButton clicked");
-    rec.stop(); //stop microphone access 
+    rec.stop();
     gumStream.getAudioTracks()[0].stop();
-    //create the wav blob and pass it on to createDownloadLink 
-    var wavPromise = new Promise((resolve) => rec.exportWAV(resolve));
-    return wavPromise;
+    rec.exportWAV(createDownloadLink);
 }

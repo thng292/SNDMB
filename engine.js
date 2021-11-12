@@ -23,23 +23,8 @@ async function Crec() {
         recing = false;
         $('#temp').remove();
         $('#voicein').html("Voice");
-        var wavData = await stopRecording();
+        stopRecording();
         $('#anima').show();
-        var url = "https://api.fpt.ai/hmi/asr/general";
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", url);
-        xhr.setRequestHeader("api-key","jtZwmbOIchxp9HfSgeTPnlvO4ApaQ8yk");
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                $("#anima").hide();
-                console.log(xhr.responseText);
-                var texxt = JSON.parse(xhr.responseText);
-                $("#anima").before('<p class="chatlog chatlogU">'+ texxt.hypotheses[0].utterance + '</p>');
-                var element = document.getElementById("chatborder");
-                element.scrollTop = element.scrollHeight;
-            }
-        }
-        xhr.send(wavData);
     }
 }
 
