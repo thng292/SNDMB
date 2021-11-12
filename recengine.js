@@ -32,15 +32,11 @@ function startRecording() {
     });
 }
 
-
-function createDownloadLink(blob) {
-    audioUrl = URL.createObjectURL(blob);
-}
-
 function stopRecording() {
     console.log("stopButton clicked");
     rec.stop(); //stop microphone access 
     gumStream.getAudioTracks()[0].stop();
     //create the wav blob and pass it on to createDownloadLink 
-    rec.exportWAV(createDownloadLink);
+    var wavPromise = new Promise((resolve) => rec.exportWAV(resolve));
+    return wavPromise;
 }

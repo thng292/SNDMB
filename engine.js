@@ -13,7 +13,7 @@ function trans() {
 }
 
 var recing = false;
-function Crec() {
+async function Crec() {
     if(!recing) {
         recing = true;
         $('#anima').before("<p class='chatlog' id='temp'>Listening</p>");
@@ -23,29 +23,23 @@ function Crec() {
         recing = false;
         $('#temp').remove();
         $('#voicein').html("Voice");
-        stopRecording();
+        var wavData = await stopRecording();
         $('#anima').show();
         var url = "https://api.fpt.ai/hmi/asr/general";
-
         var xhr = new XMLHttpRequest();
         xhr.open("POST", url);
-
-        xhr.setRequestHeader("api-key", "jtZwmbOIchxp9HfSgeTPnlvO4ApaQ8yk");
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
+        xhr.setRequestHeader("api-key","jtZwmbOIchxp9HfSgeTPnlvO4ApaQ8yk");
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
                 $("#anima").hide();
-                console.log(xhr.status);
+                console.log(xhr.responseText);
                 var texxt = JSON.parse(xhr.responseText);
                 $("#anima").before('<p class="chatlog chatlogU">'+ texxt.hypotheses[0].utterance + '</p>');
                 var element = document.getElementById("chatborder");
                 element.scrollTop = element.scrollHeight;
-            };
-        };
-
-        var data = audioUrl;
-        xhr.send(data);
+            }
+        }
+        xhr.send(wavData);
     }
 }
 
@@ -63,7 +57,7 @@ function chatbotResponse() {
     } else 
 
     if (lastUserMessage.lastIndexOf('name') != -1) {
-        botMessage = 'My name is ' + botName;
+        botMessage = 'Tên em là ' + botName;
     }
     if (lastUserMessage.lastIndexOf('mở') != -1) {
         if (lastUserMessage.lastIndexOf('nhạc') != -1) {
@@ -150,6 +144,3 @@ chb.addEventListener("keydown", function (e) {
         newEntry();
     };
 });
-
-var testJson = JSON.parse('{"status": 0,"hypotheses": [{"utterance": "ch\u00e0o m\u1eebng b\u1ea1n"}],"id": "adab73e2-a1d9-46c2-ba5e-30e575b6c3fc"}');
-console.log(testJson.hypotheses[0].utterance);
