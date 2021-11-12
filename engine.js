@@ -2,7 +2,7 @@ var lastUserMessage = "";
 var botMessage = "";
 var botName = 'Your ưaifu';
 var Uname = "Lolicon ManhBuoi: "
-var test = false; //test
+var test = true; //test
 //alert("hidding");
 
 $('#formcon').hide();
@@ -13,17 +13,39 @@ function trans() {
 }
 
 var recing = false;
-function rec() {
+function Crec() {
     if(!recing) {
         recing = true;
         $('#anima').before("<p class='chatlog' id='temp'>Listening</p>");
         $('#voicein').html("Stop");
-        toggleRecording(this);
+        startRecording();
     } else {
         recing = false;
         $('#temp').remove();
         $('#voicein').html("Voice");
+        stopRecording();
+        $('#anima').show();
+        var url = "https://api.fpt.ai/hmi/asr/general";
 
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", url);
+
+        xhr.setRequestHeader("api-key", "jtZwmbOIchxp9HfSgeTPnlvO4ApaQ8yk");
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                $("#anima").hide();
+                console.log(xhr.status);
+                var texxt = JSON.parse(xhr.responseText);
+                $("#anima").before('<p class="chatlog chatlogU">'+ texxt.hypotheses[0].utterance + '</p>');
+                var element = document.getElementById("chatborder");
+                element.scrollTop = element.scrollHeight;
+            };
+        };
+
+        var data = audioUrl;
+        xhr.send(data);
     }
 }
 
@@ -33,7 +55,7 @@ function chatbotResponse() {
     lastUserMessage = lastUserMessage.toLocaleLowerCase();
     if (lastUserMessage.lastIndexOf('chào')!=-1 || lastUserMessage.lastIndexOf('hi')!=-1) {
         const hi = ['Chào Anh', 'Hello Anh', 'Iu Anh']
-        botMessage = hi[Math.floor(Math.random() * (hi.length))];;
+        botMessage = hi[Math.floor(Math.random() * (hi.length))];
     } else
 
     if (lastUserMessage.lastIndexOf('hello') != -1) {
@@ -45,19 +67,19 @@ function chatbotResponse() {
     }
     if (lastUserMessage.lastIndexOf('mở') != -1) {
         if (lastUserMessage.lastIndexOf('nhạc') != -1) {
-            botMessage = "Đang mở bản nhạc anh thích";
+            botMessage = "Đang mở bản nhạc anh thích<br>Chúc anh nghe vui vẻ";
             window.open("https://www.youtube.com/watch?v=ORofRTMg-iY", '_blank');
         } else
         if (lastUserMessage.lastIndexOf('phim') != -1) {
-            botMessage = "Đang mở trang phim mà anh thích";
+            botMessage = "Đang mở trang phim mà anh thích<br>Chúc anh xem vui vẻ";
             window.open("hentaiz.vip", '_blank');
         } else
         if (lastUserMessage.lastIndexOf('truyện') != -1) {
-            botMessage = "Đang mở web truyện mà anh thích nhất";
+            botMessage = "Đang mở web truyện mà anh thích nhất<br>Chúc anh xem vui vẻ";
             window.open("nhentai.net", '_blank');
         } else
         if (lastUserMessage.lastIndexOf('ảnh') != -1) {
-            botMessage = "Đang mở thư viện ảnh";
+            botMessage = "Đang mở thư viện ảnh<br>Chúc anh xem vui vẻ";
             window.open("https://drive.google.com/drive/folders/1oVWheiW49xangTg3PweKfaSTh7j7yIEc",'_blank');
         }
     } else
@@ -78,23 +100,30 @@ async function Speech(say) {
         alert(say);
     else {
         var url = "https://api.fpt.ai/hmi/tts/v5";
-        var json = (await fetch(url, {
-            method: "POST",
-            headers: {
-                "api-key": "jtZwmbOIchxp9HfSgeTPnlvO4ApaQ8yk",
-                "speed": 0,
-                "voice": "banmai"
-            },
-            body: say
-        })).json();
-        $("#anima").hide();
-        console.log(xhr.status);
-        var alink = JSON.parse(xhr.responseText);
-        var audio = new Audio(alink.async);
-        audio.play();
-        $("#anima").before('<p class="chatlog">'+ botMessage + '</p>');
-        var element = document.getElementById("chatborder");
-        element.scrollTop = element.scrollHeight;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", url);
+
+        xhr.setRequestHeader("api-key", "jtZwmbOIchxp9HfSgeTPnlvO4ApaQ8yk");
+        xhr.setRequestHeader("speed", "0");
+        xhr.setRequestHeader("voice", "banmai");
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                $("#anima").hide();
+                console.log(xhr.status);
+                var alink = JSON.parse(xhr.responseText);
+                var audio = new Audio(alink.async);
+                audio.play();
+                $("#anima").before('<p class="chatlog">'+ botMessage + '</p>');
+                var element = document.getElementById("chatborder");
+                element.scrollTop = element.scrollHeight;
+            };
+        };
+
+        var data = say;
+        xhr.send(data);
     }
 }
 
@@ -114,4 +143,13 @@ function newEntry() {
         $('#chatbox').attr("placeholder", "Type sth in bro");
     }
 }
-//alert("Fuck");
+
+var chb = document.getElementById("chatbox");
+chb.addEventListener("keydown", function (e) {
+    if (e.keyCode === 13) {
+        newEntry();
+    };
+});
+
+var testJson = JSON.parse('{"status": 0,"hypotheses": [{"utterance": "ch\u00e0o m\u1eebng b\u1ea1n"}],"id": "adab73e2-a1d9-46c2-ba5e-30e575b6c3fc"}');
+console.log(testJson.hypotheses[0].utterance);
