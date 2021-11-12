@@ -5,6 +5,9 @@ function chatbotResponse(kk) {
     $("#anima").show();
     var botMessage = "I'm fucking confused"; //the default message
     lastUserMessage = kk.toLocaleLowerCase();
+    if (lastUserMessage === "cứu") {
+        botMessage = "$tên\nmở:phim, nhạc, truyện, ảnh\nthích : truyện, phim, web\nlệnh đặc biệt: show script, show source"
+    } else 
     if (lastUserMessage.lastIndexOf('chào')!=-1 || lastUserMessage.lastIndexOf('hi')!=-1) {
         const hi = ['Chào Anh', 'Hello Anh', 'Iu Anh']
         botMessage = hi[Math.floor(Math.random() * (hi.length))];
@@ -56,14 +59,7 @@ function chatbotResponse(kk) {
             } else {
                 botMessage = "Anh thích nhất... tao chịu, cứ nào có gái đẹp là mày mê à"
             }
-        } else 
-        if (lastUserMessage.lastIndexOf("truyện") !=-1) {
-            if (lastUserMessage.lastIndexOf("em")) {
-                botMessage = "Em thích nhất truyện về cuộc đời phong ba, bão táp của 1 thiếu gia như anh đó <3"
-            } else {
-                botMessage = "Anh thích nhất... tao chịu, cứ nào có gái đẹp là mày mê à"
-            }
-        } else 
+        } else  
         if (lastUserMessage.lastIndexOf("phim") !=-1) {
             if (lastUserMessage.lastIndexOf("em")) {
                 botMessage = "Em thích nhất phim về 1 thiếu gia không xấu trai, không ngáo đá như anh đó <3"

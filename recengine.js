@@ -45,6 +45,7 @@ function sendAudio(audio) {
 function createDownloadLink(blob) {
     var url = URL.createObjectURL(blob);
     window.open(url);
+    console.log(url);
     sendAudio(url);
 }
 
