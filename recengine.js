@@ -24,7 +24,7 @@ function startRecording() {
     });
 }
 
-function sendAudio(audio) {
+async function sendAudio(audio) {
     var url = "https://api.fpt.ai/hmi/asr/general";
     var xhr = new XMLHttpRequest();
     xhr.open("POST", url);
@@ -40,7 +40,16 @@ function sendAudio(audio) {
         }
     }
     xhr.send(audio);
-}
+    console.log(xhr);
+//     var sttjson = await fetch(url, {
+//         method: "POST",
+//         body: audio,
+//         headers: {
+//             "api-key": "jtZwmbOIchxp9HfSgeTPnlvO4ApaQ8yk"
+//         }
+//     }).then(res => res.json());
+//     console.log(sttjson);
+// }
 
 function createDownloadLink(blob) {
     var url = URL.createObjectURL(blob);
@@ -53,5 +62,5 @@ function stopRecording() {
     console.log("stopButton clicked");
     rec.stop();
     gumStream.getAudioTracks()[0].stop();
-    rec.exportWAV(createDownloadLink);
+    rec.exportWAV((blob) => sendAudio(blob));
 }
