@@ -18,13 +18,15 @@
             </div>
         </div>
     </div>
-    <div id="ccon">
-        <button class="cbutt" id="voicein" onclick="Crec()">Voice</button>
-        <button class="cbutt" id="typein" onclick="trans()">Type</button>
-        <div id="formcon">
-            <input type="text" id="chatbox" placeholder="Type in">
-            <button id="sendbutt" onclick="newEntry()">Send</button>
-        </div>
+    <input class="c-checkbox" type="checkbox" id="checkbox">
+    <div class="c-formContainer">
+    <div class="c-form">
+        <input class="c-form__input" placeholder="Type in" type="text" id="chatbox">
+        <label class="c-form__buttonLabel" for="checkbox">
+        <button class="c-form__button" type="button" onclick="newEntry()">Send</button>
+        </label>
+        <label class="c-form__toggle" for="checkbox" data-title="Type"></label>
+    </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="engine.js"></script>
