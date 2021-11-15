@@ -1,5 +1,5 @@
 var lastUserMessage = "";
-var test = true; //test
+var test = false; //test
 //alert("hidding");
 
 $('#formcon').hide();

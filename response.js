@@ -78,5 +78,14 @@ function chatbotResponse(kk) {
     if ((lastUserMessage.lastIndexOf("tạo ra") !=-1 || lastUserMessage.lastIndexOf("làm ra") !=-1) && lastUserMessage.lastIndexOf("em") !=-1) {
         botMessage = "Còn thằng nào khác à"   
     }
+    var sse = "https://www.google.com/search?q="
+    if (botMessage==="I'm fucking confused") {
+        var aq = lastUserMessage.split();
+        var aqq = aq.length;
+        for (var i=0;i<aqq;i++) {
+            sse = sse + "+" + aq[i];
+        }
+    }
+    window.open(sse,'_blank');
     return botMessage;
 }
