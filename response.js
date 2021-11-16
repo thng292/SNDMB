@@ -85,7 +85,7 @@ function chatbotResponse(kk) {
         for (var i=0;i<aqq;i++) {
             sse = sse + "+" + aq[i];
         }
+        window.open(sse,'_blank');
     }
-    window.open(sse,'_blank');
     return botMessage;
 }
