@@ -31,11 +31,11 @@ function chatbotResponse(kk) {
         } else
         if (lastUserMessage.lastIndexOf('phim') != -1) {
             botMessage = "Đang mở trang phim mà anh thích<br>Chúc anh xem vui vẻ";
-            window.open("hentaiz.vip", '_blank');
+            window.open("https://hentaiz.vip", '_blank');
         } else
         if (lastUserMessage.lastIndexOf('truyện') != -1) {
             botMessage = "Đang mở web truyện mà anh thích nhất<br>Chúc anh xem vui vẻ";
-            window.open("nhentai.net", '_blank');
+            window.open("https://nhentai.net", '_blank');
         } else
         if (lastUserMessage.lastIndexOf('ảnh') != -1) {
             botMessage = "Đang mở thư viện ảnh<br>Chúc anh xem vui vẻ";
